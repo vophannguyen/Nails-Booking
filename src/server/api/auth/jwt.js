@@ -1,22 +1,22 @@
 /** @file Exports JWT sign and verify functions */
 
-const jsonwebtoken = require("jsonwebtoken");
-const JWT = process.env.JWT;
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
-// Ensure JWT is set in .env
-if (!JWT) {
-  console.error("JWT not set in .env");
+// Ensure JWT_SECRET is set in .env
+if (!JWT_SECRET) {
+  console.error("JWT_SECRET not set in .env");
   process.exit(1);
 }
 
 /** @returns token from payload */
 const sign = (payload) => {
-  return jsonwebtoken.sign(payload, JWT);
+  return jwt.sign(payload, JWT_SECRET);
 };
 
 /** @returns payload from token */
 const verify = (token) => {
-  return jsonwebtoken.verify(token, JWT);
+  return jwt.verify(token, JWT_SECRET);
 };
 
 module.exports = { sign, verify };
